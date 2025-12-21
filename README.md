@@ -1,8 +1,8 @@
-# Sistema de Clasificación de Dígitos con Redes Neuronales
+# Digit Classification System with Neural Networks
 
-Proyecto completo para capturar imágenes con ESP32-CAM, procesarlas y entrenar una red neuronal para clasificar dígitos (0-9) con accuracy de 98.2%.
+Complete project to capture images with ESP32-CAM, process them, and train a neural network to classify digits (0-9) with 98.2% accuracy.
 
-## Estructura del Proyecto
+## Project Structure
 
 ```
 ├── 1_ESP32_Arduino
@@ -24,88 +24,88 @@ Proyecto completo para capturar imágenes con ESP32-CAM, procesarlas y entrenar 
 └── .gitignore
 ```
 
-## Cómo Replicar el Proyecto
+## How to Replicate the Project
 
-### Paso 1: Configurar ESP32-CAM
+### Step 1: Configure ESP32-CAM
 
-1. Abre `1_ESP32_Arduino/WifiCam.ino` en Arduino IDE
-2. Configura WiFi en el código
-3. Carga el firmware en tu ESP32-CAM
-4. Obtén la IP del ESP32 desde Serial Monitor
+1. Open `1_ESP32_Arduino/WifiCam.ino` in Arduino IDE
+2. Configure WiFi in the code
+3. Upload firmware to your ESP32-CAM
+4. Get the ESP32 IP from Serial Monitor
 
-Archivos necesarios:
-- `WifiCam.hpp` - Definiciones
-- `handlers.cpp` - Controladores
+Required files:
+- `WifiCam.hpp` - Definitions
+- `handlers.cpp` - Handlers
 
-### Paso 2: Descargar Imágenes
+### Step 2: Download Images
 
 ```bash
 cd 2_Image_Capture
 python capture_esp32_images.py
 ```
 
-Configura en el script:
-- `url = "http://[TU_IP]/1024x768.jpg"`
+Configure in the script:
+- `url = "http://[YOUR_IP]/1024x768.jpg"`
 - `num_capturas = 20`
-- `intervalo = 3` (segundos)
+- `intervalo = 3` (seconds)
 
-Salida: 20 imágenes JPG en la carpeta seleccionada
+Output: 20 JPG images in selected folder
 
-Ver: `2_Image_Capture/README.md`
+See: `2_Image_Capture/README.md`
 
-### Paso 3: Procesar Imágenes
+### Step 3: Process Images
 
 ```bash
 cd 3_Image_Processing
 jupyter notebook 03_Preprocessing.ipynb
 ```
 
-Proceso:
-1. Carga ZIP con imágenes
-2. Binariza con threshold OTSU
-3. Extrae 6 manchas por imagen
-4. Redimensiona a 28×28 píxeles
-5. Exporta ZIP con manchas
+Process:
+1. Load ZIP with images
+2. Binarize with OTSU threshold
+3. Extract 6 blobs per image
+4. Resize to 28×28 pixels
+5. Export ZIP with blobs
 
-Salida: 120+ imágenes procesadas (6 por foto original)
+Output: 120+ processed images (6 per original photo)
 
-Ver: `3_Image_Processing/README.md`
+See: `3_Image_Processing/README.md`
 
-### Paso 4: Entrenar Red Neuronal
+### Step 4: Train Neural Network
 
 ```bash
 cd 4_Neural_Network_Training
 jupyter notebook 04_Neural_Network_Training_and_Prediction.ipynb
 ```
 
-Procesos:
-1. Carga dataset MNIST (60k train, 5k test, 5k val)
-2. Normaliza imágenes [0-1]
-3. Busca hiperparámetros óptimos
-4. Entrena red neuronal
-5. Realiza predicciones
+Processes:
+1. Load MNIST dataset (60k train, 5k test, 5k val)
+2. Normalize images [0-1]
+3. Search optimal hyperparameters
+4. Train neural network
+5. Make predictions
 
-Arquitectura Final:
+Final Architecture:
 ```
 Input (784) → Dense(448, ReLU) → Dense(224, ReLU) → Output(10, Softmax)
 ```
 
-Resultados:
-- Accuracy Entrenamiento: ~99%
-- Accuracy Validación: ~98%
-- Accuracy Test: ~98.2%
+Results:
+- Training Accuracy: ~99%
+- Validation Accuracy: ~98%
+- Test Accuracy: ~98.2%
 
-Ver: `4_Neural_Network_Training/README.md`
+See: `4_Neural_Network_Training/README.md`
 
-## Instalación Rápida
+## Quick Installation
 
-### Requisitos
+### Requirements
 
 ```bash
 pip install tensorflow keras keras-tuner scikit-learn matplotlib numpy pandas opencv-python requests pillow
 ```
 
-O instala todos:
+Or install all:
 
 ```bash
 pip install -r requirements.txt
@@ -113,150 +113,150 @@ pip install -r requirements.txt
 
 ### Hardware
 
-- ESP32-CAM con módulo WiFi
-- Computadora con Python 3.8+
-- GPU recomendada (opcional)
+- ESP32-CAM with WiFi module
+- Computer with Python 3.8+
+- GPU recommended (optional)
 
-## Flujo Completo en 5 Minutos
+## Complete Flow in 5 Minutes
 
 ```
 ┌─────────────────────────────────┐
-│ 1. CAPTURA (ESP32-CAM)          │
-│    ↓ 20 imágenes               │
+│ 1. CAPTURE (ESP32-CAM)          │
+│    ↓ 20 images                  │
 └─────────────────────────────────┘
         ↓
 ┌─────────────────────────────────┐
-│ 2. DESCARGAR (Python Script)    │
-│    ↓ Almacena JPG              │
+│ 2. DOWNLOAD (Python Script)     │
+│    ↓ Stores JPG                 │
 └─────────────────────────────────┘
         ↓
 ┌─────────────────────────────────┐
-│ 3. PROCESAR (Jupyter)           │
-│    ↓ Extrae 6 manchas/imagen   │
-│    ↓ Binariza y redimensiona   │
+│ 3. PROCESS (Jupyter)            │
+│    ↓ Extract 6 blobs/image      │
+│    ↓ Binarize and resize        │
 └─────────────────────────────────┘
         ↓
 ┌─────────────────────────────────┐
-│ 4. ENTRENAR (Jupyter)           │
-│    ↓ Red neuronal MNIST         │
+│ 4. TRAIN (Jupyter)              │
+│    ↓ MNIST neural network       │
 │    ↓ Accuracy: 98.2%            │
-│    ↓ Predicciones               │
+│    ↓ Predictions                │
 └─────────────────────────────────┘
 ```
 
-## Archivos Importantes
+## Important Files
 
-| Archivo | Descripción |
-|---------|-------------|
-| `1_ESP32_Arduino/WifiCam.ino` | Firmware ESP32-CAM |
-| `2_Image_Capture/capture_esp32_images.py` | Descarga imágenes |
-| `3_Image_Processing/03_Preprocessing.ipynb` | Procesa imágenes |
-| `4_Neural_Network_Training/04_Neural_Network_Training_and_Prediction.ipynb` | Entrena y predice |
+| File | Description |
+|------|-------------|
+| `1_ESP32_Arduino/WifiCam.ino` | ESP32-CAM firmware |
+| `2_Image_Capture/capture_esp32_images.py` | Download images |
+| `3_Image_Processing/03_Preprocessing.ipynb` | Process images |
+| `4_Neural_Network_Training/04_Neural_Network_Training_and_Prediction.ipynb` | Train and predict |
 
-## Configuración Necesaria
+## Required Configuration
 
-Edita estos valores según tu setup:
+Edit these values according to your setup:
 
 **ESP32:**
 ```cpp
-const char* ssid = "tu_wifi";
-const char* password = "tu_password";
+const char* ssid = "your_wifi";
+const char* password = "your_password";
 int camera_resolution = FRAMESIZE_XGA; // 1024x768
 ```
 
 **Python (capture):**
 ```python
-url = "http://192.168.1.110/1024x768.jpg"  # Tu IP del ESP32
+url = "http://192.168.1.110/1024x768.jpg"  # Your ESP32 IP
 num_capturas = 20
-intervalo = 3  # segundos
+intervalo = 3  # seconds
 ```
 
-**Procesamiento:**
+**Processing:**
 ```python
-roi1 = bin_img[130:250, 220:700]     # Región principal
-roi2 = bin_img[160:240, 725:770]     # Región secundaria
-tamaño_salida = 28                   # Tamaño manchas
+roi1 = bin_img[130:250, 220:700]     # Main region
+roi2 = bin_img[160:240, 725:770]     # Secondary region
+tamaño_salida = 28                   # Blob size
 ```
 
-**Entrenamiento:**
+**Training:**
 ```python
-epochs = 108                    # Número de épocas
-batch_size = 540               # Tamaño batch
-learning_rate = 0.001          # Tasa aprendizaje
-units_capa1 = 448              # Neuronas capa 1
-units_capa2 = 224              # Neuronas capa 2
+epochs = 108                    # Number of epochs
+batch_size = 540               # Batch size
+learning_rate = 0.001          # Learning rate
+units_capa1 = 448              # Layer 1 neurons
+units_capa2 = 224              # Layer 2 neurons
 ```
 
-## Características
+## Features
 
-✅ Captura automática con ESP32-CAM
-✅ Descarga por HTTP sin SD card
-✅ Procesamiento automático de imágenes
-✅ Binarización con threshold OTSU
-✅ Extracción inteligente de manchas
-✅ Red neuronal entrenada (98.2% accuracy)
-✅ Predicciones en tiempo real
-✅ Código modular y reutilizable
+✅ Automatic image capture with ESP32-CAM
+✅ HTTP download without SD card
+✅ Automatic image processing
+✅ OTSU threshold binarization
+✅ Intelligent blob extraction
+✅ Trained neural network (98.2% accuracy)
+✅ Real-time predictions
+✅ Modular and reusable code
 
-## Solución de Problemas
+## Troubleshooting
 
-**"No se conecta al ESP32"**
-- Verifica IP en Serial Monitor
-- Asegúrate WiFi esté configurado
-- Prueba ping a la IP
+**"Cannot connect to ESP32"**
+- Verify IP in Serial Monitor
+- Make sure WiFi is configured
+- Try ping to the IP
 
-**"Error en procesamiento de imágenes"**
-- Verifica resolución sea 1024x768
-- Ajusta ROI según tu imagen
-- Revisa paths absolutos/relativos
+**"Error in image processing"**
+- Verify resolution is 1024x768
+- Adjust ROI according to your image
+- Check absolute/relative paths
 
-**"Accuracy bajo en predicciones"**
-- Aumenta epochs a 150+
-- Prueba batch_size = 256
-- Normaliza bien las imágenes
+**"Low accuracy in predictions"**
+- Increase epochs to 150+
+- Try batch_size = 256
+- Normalize images properly
 
-## Documentación Detallada
+## Detailed Documentation
 
-Para información específica de cada paso, consulta:
+For specific information on each step, see:
 - `1_ESP32_Arduino/README.md`
 - `2_Image_Capture/README.md`
 - `3_Image_Processing/README.md`
 - `4_Neural_Network_Training/README.md`
 
-## Resultados Esperados
+## Expected Results
 
-### Captura
-- 20 imágenes con extensión clara
-- Resolución 1024×768
+### Capture
+- 20 images with clear extension
+- Resolution 1024×768
 
-### Procesamiento
-- 120+ manchas extraídas
-- Imágenes binarizadas y limpias
-- Tamaño uniforme 28×28
+### Processing
+- 120+ extracted blobs
+- Binarized and clean images
+- Uniform 28×28 size
 
-### Entrenamiento
-- Accuracy train: ~99%
-- Accuracy validation: ~98%
-- Accuracy test: ~98.2%
-- Loss final: < 0.08
+### Training
+- Training accuracy: ~99%
+- Validation accuracy: ~98%
+- Test accuracy: ~98.2%
+- Final loss: < 0.08
 
-### Predicción
-- Predice dígitos 0-9
-- Confianza: 85-95%
-- Tiempo: <100ms por imagen
+### Prediction
+- Predicts digits 0-9
+- Confidence: 85-95%
+- Time: <100ms per image
 
-## Licencia
+## License
 
-Este proyecto está bajo licencia MIT. Ver archivo `LICENSE`.
+This project is under MIT license. See `LICENSE` file.
 
-## Autor
+## Author
 
-Proyecto de clasificación de dígitos con aprendizaje profundo.
-Última actualización: Diciembre 2025
+Digit classification project with deep learning.
+Last update: December 2025
 
 ---
 
-**Estado:** Activo ✅
-**Versión:** 1.0
+**Status:** Active ✅
+**Version:** 1.0
 **Framework:** TensorFlow + Keras + OpenCV
 **Accuracy:** 98.2%
