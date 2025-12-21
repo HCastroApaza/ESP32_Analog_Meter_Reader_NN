@@ -1,8 +1,8 @@
 #include "WifiCam.hpp"
 #include <WiFi.h>
 #include <esp_sleep.h>
-static const char* WIFI_SSID = "UTP-CAMPUS";
-static const char* WIFI_PASS = "Aprende+";
+const char* WIFI_SSID = "Mi_Red_WiFi";     // Tu SSID
+const char* WIFI_PASS = "Mi_Contraseña";   // Tu contraseña
 
 esp32cam::Resolution initialResolution;
 
