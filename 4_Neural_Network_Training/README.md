@@ -1,22 +1,18 @@
-# PASO 4: Neural Network Training
+# PASO 4: Neural Network Training and Prediction
 
-Notebook para entrenar una red neuronal en dataset MNIST.
+Notebook para entrenar una red neuronal en dataset MNIST y realizar predicciones.
 
 ## Archivo
 
-- `04_Neural_Network_Training.ipynb` - Hiperparameter tuning y entrenamiento
+- `04_Neural_Network_Training_and_Prediction.ipynb` - Hiperparameter tuning, entrenamiento y predicción
 
 ## Instalación
 
 pip install tensorflow keras keras-tuner scikit-learn matplotlib numpy pandas
 
-text
-
 ## Cómo Usar
 
-jupyter notebook 04_Neural_Network_Training.ipynb
-
-text
+jupyter notebook 04_Neural_Network_Training_and_Prediction.ipynb
 
 **Sigue estos pasos:**
 
@@ -44,11 +40,15 @@ text
    - Visualiza accuracy vs epochs
    - Obtén métricas finales en test set
 
+6. **Realiza Predicciones** ⭐
+   - Predicciones en conjunto de test
+   - Predicciones en conjunto de validación
+   - Predicciones en imágenes individuales
+   - Obtén clase predicha y confianza
+
 ## Arquitectura de la Red
 
 Input (784) → Dense(448, ReLU) → Dense(224, ReLU) → Output(10, Softmax)
-
-text
 
 ## Parámetros
 
@@ -65,9 +65,12 @@ text
 
 - **Training Accuracy:** ~99%
 - **Validation Accuracy:** ~98%
+- **Test Accuracy:** ~98.2%
 - **Loss:** < 0.08
+
 
 ---
 
 **Status:** Activo ✅
 **Framework:** TensorFlow 2.x + Keras
+**Predicción:** Habilitada ✅
