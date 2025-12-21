@@ -1,81 +1,88 @@
-# PASO 3: Preprocessing
+# STEP 3: Preprocessing
 
-Notebook para procesar y extraer manchas de imágenes de medidores.
+Notebook to process and extract blobs from meter images.
 
-## Archivo
+## File
 
-- `03_Preprocessing.ipynb` - Binarización y extracción de manchas
+- `03_Preprocessing.ipynb` - Binarization and blob extraction
 
-## Instalación
+## Installation
 
+```bash
 pip install opencv-python numpy matplotlib tqdm
+```
 
-text
+## How to Use
 
-## Cómo Usar
-
+```bash
 jupyter notebook 03_Preprocessing.ipynb
+```
 
-text
+**Follow these steps:**
 
-**Sigue estos pasos:**
+1. **Load images**
+   - Upload ZIP file with JPG/PNG images
+   - Extracts automatically
 
-1. **Carga imágenes**
-   - Sube archivo ZIP con imágenes JPG/PNG
-   - Extrae automáticamente
+2. **Binarize images**
+   - Converts to grayscale
+   - Applies automatic threshold (OTSU)
 
-2. **Binariza imágenes**
-   - Convierte a escala de grises
-   - Aplica threshold automático (OTSU)
+3. **Define regions of interest (ROI)**
+   - ROI 1: Main region [130:250, 220:700]
+   - ROI 2: Secondary region [160:240, 725:770]
 
-3. **Define regiones de interés (ROI)**
-   - ROI 1: Región principal [130:250, 220:700]
-   - ROI 2: Región secundaria [160:240, 725:770]
+4. **Extract blobs**
+   - 5 largest blobs from ROI 1
+   - 1 largest blob from ROI 2
+   - Total: 6 blobs per image
 
-4. **Extrae manchas**
-   - 5 manchas más grandes de ROI 1
-   - 1 mancha más grande de ROI 2
-   - Total: 6 manchas por imagen
+5. **Process blobs**
+   - Applies morphology (closing)
+   - Adds padding margins
+   - Resizes to 28×28 pixels
 
-5. **Procesa manchas**
-   - Aplica morphology (closing)
-   - Agrega márgenes (padding)
-   - Redimensiona a 28×28 píxeles
+6. **Export results**
+   - Saves all blobs in ZIP
+   - Format: `image_blob_N.png`
 
-6. **Exporta resultados**
-   - Guarda todas las manchas en ZIP
-   - Formato: `imagen_mancha_N.png`
+## Main Functions
 
-## Funciones Principales
+| Function | Description |
+|----------|-------------|
+| `binarizar()` | Converts to binary with OTSU |
+| `extraer_5_manchas_mas_grandes()` | Extracts blobs ordered by position |
+| `procesar_zip()` | Processes complete ZIP |
 
-| Función | Descripción |
-|---------|-------------|
-| `binarizar()` | Convierte a binaria con OTSU |
-| `extraer_5_manchas_mas_grandes()` | Extrae manchas ordenadas por posición |
-| `procesar_zip()` | Procesa ZIP completo |
+## Adjustable Parameters
 
-## Parámetros Ajustables
+**ROI (Region of Interest)**
 
-ROI (Region of Interest)
-roi1 = bin_img[130:250, 220:700] # Región principal
-roi2 = bin_img[160:240, 725:770] # Región secundaria
+```python
+roi1 = bin_img[130:250, 220:700]  # Main region
+roi2 = bin_img[160:240, 725:770]  # Secondary region
+```
 
-Extracción de manchas
-blobs = 5 # Número de manchas a extraer
-kernel_size = 3 # Tamaño kernel morphology
+**Blob Extraction**
 
-Salida
-tamaño_salida = 28 # Tamaño final de mancha
-margen = 10 # Píxeles de margen
+```python
+blobs = 5           # Number of blobs to extract
+kernel_size = 3     # Morphology kernel size
+```
 
-text
+**Output**
 
-## Entrada/Salida
+```python
+tamaño_salida = 28  # Final blob size
+margen = 10         # Padding pixels
+```
 
-**Entrada:** ZIP con imágenes (JPG/PNG)
-**Salida:** ZIP con manchas extraídas (28×28 PNG)
+## Input/Output
+
+**Input:** ZIP with images (JPG/PNG)
+**Output:** ZIP with extracted blobs (28×28 PNG)
 
 ---
 
-**Status:** Activo ✅
+**Status:** Active ✅
 **Framework:** OpenCV + NumPy
