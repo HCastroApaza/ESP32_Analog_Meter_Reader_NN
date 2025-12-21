@@ -1,95 +1,95 @@
-# PASO 2: Descargar Imágenes del ESP32-CAM
+# STEP 2: Download Images from ESP32-CAM
 
-Script Python para descargar 20 imágenes del ESP32-CAM mediante HTTP.
+Python script to download 20 images from ESP32-CAM via HTTP.
 
-## Archivo
+## File
 
-- `capture_esp32_images.py` - Script de captura automática
+- `capture_esp32_images.py` - Automatic capture script
 
-## Instalación
+## Installation
 
+```bash
 pip install requests pillow matplotlib
+```
 
-text
+## How to Use
 
-## Cómo Usar
-
+```bash
 python capture_esp32_images.py
+```
 
-text
+**The program will do the following:**
 
-**El programa hará lo siguiente:**
+1. **Opens folder dialog**
+   - Select where to save images
+   - If you cancel, uses current directory
 
-1. **Abre diálogo de carpeta**
-   - Selecciona dónde guardar las imágenes
-   - Si cancelas, usa directorio actual
-
-2. **Conecta al ESP32-CAM**
+2. **Connects to ESP32-CAM**
    - URL: `http://192.168.1.110//1024x768.jpg`
-   - (Cambia IP si tu ESP32 tiene otra)
+   - (Change IP if your ESP32 has a different one)
 
-3. **Captura 20 imágenes**
-   - Una cada 3 segundos
-   - Naming: `captura_YYYYMMDD_HHMMSS_ffffff.jpg`
-   - Manejo automático de errores
+3. **Captures 20 images**
+   - One every 3 seconds
+   - Naming: `capture_YYYYMMDD_HHMMSS_ffffff.jpg`
+   - Automatic error handling
 
-4. **Muestra resultados**
-   - Selecciona 2 imágenes al azar
-   - Visualiza en interfaz gráfica
+4. **Shows results**
+   - Selects 2 random images
+   - Displays in graphical interface
 
-## Configuración
+## Configuration
 
-Edita estos valores en el código:
+Edit these values in the code:
 
-url = "http://192.168.1.110//1024x768.jpg" # IP y resolución
-num_capturas = 20 # Número de imágenes
-intervalo = 3 # Segundos entre capturas
+```python
+url = "http://192.168.1.110//1024x768.jpg"  # IP and resolution
+num_capturas = 20                             # Number of images
+intervalo = 3                                 # Seconds between captures
+```
 
-text
+## Functions
 
-## Funciones
+| Function | Purpose |
+|----------|---------|
+| `seleccionar_carpeta()` | Opens dialog to select folder |
+| `capturar_imagenes()` | Downloads images from ESP32 |
+| `mostrar_imagenes_aleatorias()` | Displays 2 random images |
 
-| Función | Propósito |
-|---------|-----------|
-| `seleccionar_carpeta()` | Abre diálogo para elegir carpeta |
-| `capturar_imagenes()` | Descarga imágenes del ESP32 |
-| `mostrar_imagenes_aleatorias()` | Visualiza 2 imágenes al azar |
+## Features
 
-## Características
+✅ Graphical interface to select folder
+✅ Unique timestamps in filenames
+✅ Automatic error handling
+✅ HTTP download with timeout
+✅ Sample visualization
 
-✅ Interfaz gráfica para seleccionar carpeta
-✅ Timestamps únicos en nombres
-✅ Manejo automático de errores
-✅ Descarga HTTP con timeout
-✅ Visualización de muestras
+## Prerequisites
 
-## Requisitos Previos
-
-- ESP32-CAM debe estar en red y sirviendo imágenes
-- Saber IP del ESP32 (ver Serial Monitor del PASO 1)
+- ESP32-CAM must be on network and serving images
+- Know ESP32 IP (see Serial Monitor from STEP 1)
 - Python 3.6+
 
-## Salida
+## Output
 
-=== Programa de Captura de Imágenes ===
-Por favor seleccione la carpeta...
+```
+=== Image Capture Program ===
+Please select the folder...
 
-Las imágenes se guardarán en: /ruta/carpeta
+Images will be saved to: /path/folder
 
-Imagen 1/20 capturada: captura_20250621_143022_456789.jpg
-Imagen 2/20 capturada: captura_20250621_143025_456789.jpg
+Image 1/20 captured: capture_20250621_143022_456789.jpg
+Image 2/20 captured: capture_20250621_143025_456789.jpg
 ...
-Imagen 20/20 capturada: captura_20250621_143057_456789.jpg
+Image 20/20 captured: capture_20250621_143057_456789.jpg
 
-Seleccionando 2 imágenes aleatorias para mostrar...
-[Visualiza 2 imágenes al azar]
+Selecting 2 random images to display...
+[Displays 2 random images]
 
-Programa finalizado.
-
-text
+Program finished.
+```
 
 ---
 
-**Status:** Activo ✅
+**Status:** Active ✅
 **Framework:** Requests + PIL + Matplotlib
-**Imágenes:** 20 captures a 3 segundos cada una
+**Images:** 20 captures at 3 seconds each
