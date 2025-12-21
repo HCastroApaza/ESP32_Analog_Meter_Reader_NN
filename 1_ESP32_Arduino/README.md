@@ -1,43 +1,42 @@
-# PASO 1: ESP32-CAM Arduino Code
+# STEP 1: ESP32-CAM Arduino Code
 
 Resources and documentation for Arduino code implementing a WiFi-based image capture and streaming system using ESP32-CAM microcontroller. The code is organized in a modular architecture with separate files for main logic, declarations, and HTTP handlers. This system allows real-time image streaming and capture through a web browser interface.
 
-## Descripción
+## Description
 
-Código Arduino IDE para subir imágenes capturadas por ESP32-CAM a un servidor web.
-Las imágenes se visualizan por IP desde cualquier navegador.
+Arduino IDE code to upload images captured by ESP32-CAM to a web server. Images are displayed by IP from any web browser.
 
 ## Project Structure
 
 The project hierarchy and files description is as follows:
 
 1. **1_ESP32_Arduino**: Arduino IDE sketch folder
-   1. `WifiCam.ino` - Archivo principal (abre ESTE en Arduino IDE). Contains setup() and loop() functions for WiFi initialization and HTTP server management.
-   2. `WifiCam.hpp` - Header file (declaraciones). Contains all function declarations, variable definitions and preprocessor directives with `#ifndef` guards.
-   3. `handlers.cpp` - Manejadores HTTP (funciones). Contains implementation of HTTP request handlers:
+   1. `WifiCam.ino` - Main file (open THIS in Arduino IDE). Contains setup() and loop() functions for WiFi initialization and HTTP server management.
+   2. `WifiCam.hpp` - Header file (declarations). Contains all function declarations, variable definitions and preprocessor directives with `#ifndef` guards.
+   3. `handlers.cpp` - HTTP handlers (functions). Contains implementation of HTTP request handlers:
       1. `handleRoot()` - Serves main HTML interface page
       2. `handleCapture()` - Captures single image
       3. `handleStream()` - Continuous MJPEG video stream
       4. `handleJpg()` - Returns current JPEG frame
 
-## Especificaciones
+## Specifications
 
-- **Resolución:** 1024×768 JPG
-- **Servidor:** Puerto 80 y 81
-- **Interfaz:** Web browser por IP
+- **Resolution:** 1024×768 JPG
+- **Server:** Port 80 and 81
+- **Interface:** Web browser via IP
 - **WiFi:** Configurable (SSID + Password)
-- **Arquitectura:** 3 archivos modulares (.ino + .hpp + .cpp)
+- **Architecture:** 3 modular files (.ino + .hpp + .cpp)
 
-## Características
+## Features
 
-✅ Transmisión WiFi en tiempo real
-✅ Resolución 1024×768
-✅ Consumo bajo en espera
-✅ Compatible con deep sleep mode
-✅ Arquitectura modular escalable
-✅ Interfaz web intuitiva
+✅ Real-time WiFi transmission
+✅ 1024×768 resolution
+✅ Low standby power consumption
+✅ Compatible with deep sleep mode
+✅ Scalable modular architecture
+✅ Intuitive web interface
 
-## Dependencias
+## Dependencies
 
 - Arduino IDE 1.8.13+
 - ESP32 Board Support 2.0+
@@ -45,122 +44,111 @@ The project hierarchy and files description is as follows:
 
 ---
 
-## Cómo usar
+## How to Use
 
-1. Abre Arduino IDE
-2. Instala librería: `esp32-camera` (Espressif)
-3. Descarga los **3 archivos juntos**
-4. Coloca en la **MISMA carpeta**
-5. Abre **SOLO** `WifiCam.ino`
-6. Configura SSID y Password de tu WiFi
-7. Selecciona Board: **"AI Thinker ESP32-CAM"**
-8. Sube el código (Ctrl+U)
-9. Abre Serial Monitor (115200 baud)
-10. Copia la IP que aparece en consola
-11. Abre navegador: `http://192.168.x.x` (tu IP)
+1. Open Arduino IDE
+2. Install library: `esp32-camera` (Espressif)
+3. Download the **3 files together**
+4. Place in the **SAME folder**
+5. Open **ONLY** `WifiCam.ino`
+6. Configure your WiFi SSID and Password
+7. Select Board: **"AI Thinker ESP32-CAM"**
+8. Upload the code (Ctrl+U)
+9. Open Serial Monitor (115200 baud)
+10. Copy the IP that appears in the console
+11. Open browser: `http://192.168.x.x` (your IP)
 
 ---
 
-## 🔧 INSTALACIÓN PASO A PASO EN ARDUINO IDE
+## 🔧 STEP-BY-STEP INSTALLATION IN ARDUINO IDE
 
-### 1️⃣ Abre Arduino IDE
+### 1️⃣ Open Arduino IDE
 
-Inicia el programa Arduino IDE en tu computadora.
+Launch the Arduino IDE program on your computer.
 
-### 2️⃣ Abre el archivo WifiCam.ino
+### 2️⃣ Open the WifiCam.ino file
 
-Arduino IDE cargará automáticamente los otros 2 archivos.
+Arduino IDE will automatically load the other 2 files.
 
-### 3️⃣ Verifica que las 3 pestañas están presentes
+### 3️⃣ Verify that the 3 tabs are present
 
-En la parte **INFERIOR** del editor, deberías ver **3 pestañas**:
+At the **BOTTOM** of the editor, you should see **3 tabs**:
 
-Si ves las 3 pestañas, ¡todo está bien! ✅
+If you see the 3 tabs, everything is good! ✅
 
-### 4️⃣ Configura tu WiFi
+### 4️⃣ Configure your WiFi
 
-En la pestaña **WifiCam.ino**, busca estas líneas:
+In the **WifiCam.ino** tab, find these lines:
 
+```cpp
+const char* WIFI_SSID = "Mi_Red_WiFi"; // Your SSID
+const char* WIFI_PASS = "Mi_Contraseña"; // Your password
+```
 
-Reemplaza con tus credenciales:
+Replace with your credentials.
 
-const char* WIFI_SSID = "Mi_Red_WiFi"; // Tu SSID
-const char* WIFI_PASS = "Mi_Contraseña"; // Tu contraseña
+### 5️⃣ Select the correct Board
 
-### 5️⃣ Selecciona el Board correcto
+Menu: Tools → Board
+Search: "AI Thinker ESP32-CAM"
+Select it
 
-Menú: Herramientas → Placa
-Busca: "AI Thinker ESP32-CAM"
-Selecciona
+### 6️⃣ Select the COM Port
 
-text
+Menu: Tools → Port
+Select the port where your ESP32 is connected
+Example: COM3, COM4, /dev/ttyUSB0, etc.
 
-### 6️⃣ Selecciona el Puerto COM
+### 7️⃣ Upload the code
 
-Menú: Herramientas → Puerto
-Selecciona el puerto donde está conectado tu ESP32
-Ej: COM3, COM4, /dev/ttyUSB0, etc.
+Sketch → Upload
+Or press: Ctrl+U
 
-text
+Wait for it to finish. You will see a success message:
 
-### 7️⃣ Sube el código
+```
+Uploading...
+Writing at 0x00010000... (100%)
+Done! Upload complete.
+```
 
-Sketch → Subir
-O presiona: Ctrl+U
+### 8️⃣ Open Serial Monitor
 
-text
+Tools → Serial Monitor
+Or press: Ctrl+Shift+M
 
-Espera a que termine. Verás un mensaje de éxito:
+Important: Speed = 115200 baud
 
-Subiendo...
-Escribiendo a 0x00010000... (100%)
-¡Listo! La carga se ha completado.
+### 9️⃣ Get your ESP32 IP
 
-text
+In the Serial Monitor you will see:
 
-### 8️⃣ Abre Serial Monitor
-
-Herramientas → Serial Monitor
-O presiona: Ctrl+Shift+M
-
-Importante: Velocidad = 115200 baud
-
-text
-
-### 9️⃣ Obtén la IP de tu ESP32
-
-En el Serial Monitor verás:
-
-Conectando a WiFi...
+```
+Connecting to WiFi...
 ...
-✅ Conectado a WiFi
-IP: 192.168.1.110 ← COPIA ESTA IP
-Servidor iniciado en puerto 80
+✅ Connected to WiFi
+IP: 192.168.1.110 ← COPY THIS IP
+Server started on port 80
+```
 
-text
+### 🔟 Open in your browser
 
-### 🔟 Abre en tu navegador
+Type in the address bar:
 
-Escribe en la barra de direcciones:
+`http://192.168.1.110`
 
-http://192.168.1.110
+Or replace with the IP you saw in Serial Monitor.
 
-text
-
-O reemplaza con la IP que viste en Serial Monitor.
-
-¡Deberías ver la interfaz web! 🎉
+You should see the web interface! 🎉
 
 ---
 
-## ⚠️ Errores Comunes
+## ⚠️ Common Errors
 
-| Error | Solución |
+| Error | Solution |
 |-------|----------|
-| "WifiCam.hpp: No such file" | Los 3 archivos deben estar juntos en la misma carpeta |
-| "handlers.cpp: No such file" | Verifica que WifiCam.hpp tenga `#include "handlers.cpp"` |
-| "Arduino.h not found" | Instala ESP32 Board Support desde Board Manager |
-| "No conecta WiFi" | Verifica SSID/Password, WiFi 2.4GHz, Serial Monitor 115200 |
-| "Connection refused" | Presiona RESET en ESP32, espera 2s, refresca navegador |
-
----
+| "WifiCam.hpp: No such file" | The 3 files must be together in the same folder |
+| "handlers.cpp: No such file" | Verify that WifiCam.hpp has `#include "handlers.cpp"` |
+| "Arduino.h not found" | Install ESP32 Board Support from Board Manager |
+| "Won't connect to WiFi" | Verify SSID/Password, WiFi 2.4GHz, Serial Monitor 115200 |
+| "Connection refused" | Press RESET on ESP32, wait 2s, refresh browser |
