@@ -1,36 +1,73 @@
-# PASO 4: Crear y Entrenar Red Neuronal
+# PASO 4: Neural Network Training
 
-## Descripción
+Notebook para entrenar una red neuronal en dataset MNIST.
 
-Dos notebooks para crear y entrenar la red neuronal:
+## Archivo
 
-1. `04_Hyperparameter_Tuning.ipynb` - Buscar parámetros óptimos
-2. `05_Neural_Network_Training.ipynb` - Entrenar modelo final
+- `04_Neural_Network_Training.ipynb` - Hiperparameter tuning y entrenamiento
 
-## Notebooks
+## Instalación
 
-### 04_Hyperparameter_Tuning.ipynb
+pip install tensorflow keras keras-tuner scikit-learn matplotlib numpy pandas
 
-Usa Keras Tuner para encontrar:
-- Número óptimo de neuronas (32-512)
-- Tasa de aprendizaje óptima (1e-2, 1e-3, 1e-4)
+text
 
-**Resultado esperado:**
-- Units: 448
-- Learning Rate: 0.001
+## Cómo Usar
 
-### 05_Neural_Network_Training.ipynb
+jupyter notebook 04_Neural_Network_Training.ipynb
 
-Entrena la red neuronal final con arquitectura 448-224-10:
-- Entrada: 784 (28×28 aplanado)
-- Hidden 1: 448 (ReLU)
-- Hidden 2: 224 (ReLU)
-- Output: 10 (Softmax - dígitos 0-9)
+text
 
-**Resultado esperado:**
-- Test Accuracy: 98.37%
+**Sigue estos pasos:**
 
-## Requisitos
+1. **Importa librerías y datos MNIST**
+   - Carga el dataset MNIST automáticamente
+   - Divide en train (60k), test (5k), validation (5k)
 
-```bash
-pip install tensorflow keras keras-tuner scikit-learn matplotlib
+2. **Normaliza datos**
+   - Convierte imágenes de 28×28 a array 784 dimensiones
+   - Normaliza valores de 0-255 a 0-1
+   - Categoriza etiquetas
+
+3. **Optimiza hiperparámetros**
+   - Usa Keras Tuner para búsqueda
+   - Rango neuronas: 32-512
+   - Tasas de aprendizaje: [0.01, 0.001, 0.0001]
+   - **Resultado:** Units: 160, Learning Rate: 0.001
+
+4. **Entrena modelo final**
+   - Arquitectura: 784 → 448 → 224 → 10
+   - 108 épocas, batch size 540
+   - Validación en datos hold-out
+
+5. **Evalúa resultados**
+   - Visualiza accuracy vs epochs
+   - Obtén métricas finales en test set
+
+## Arquitectura de la Red
+
+Input (784) → Dense(448, ReLU) → Dense(224, ReLU) → Output(10, Softmax)
+
+text
+
+## Parámetros
+
+| Parámetro | Valor |
+|-----------|-------|
+| Optimizer | Adam |
+| Learning Rate | 0.001 |
+| Loss | Categorical Crossentropy |
+| Batch Size | 540 |
+| Epochs | 108 |
+| Métricas | Accuracy, Precision |
+
+## Resultados Esperados
+
+- **Training Accuracy:** ~99%
+- **Validation Accuracy:** ~98%
+- **Loss:** < 0.08
+
+---
+
+**Status:** Activo ✅
+**Framework:** TensorFlow 2.x + Keras
