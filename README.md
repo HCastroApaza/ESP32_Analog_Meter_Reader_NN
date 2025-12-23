@@ -1,5 +1,7 @@
 # Digit Classification System with Neural Networks
 
+![Graphical abstract](/ProjectImages/GraphicalAbstract.png)
+
 Complete project to capture images with ESP32-CAM, process them, and train a neural network to classify digits (0-9) with 98.2% accuracy.
 
 ## Project Structure
